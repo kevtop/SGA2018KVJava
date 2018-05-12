@@ -36,7 +36,7 @@ public class Alumno implements Serializable {
 	//fetch lazy sirve para cargar solo los elementos asociados cuando se requieren
 	@ManyToOne(fetch = FetchType.EAGER)
 	//con la etiqueta joincolumn se utilizan los campos a nivel de tablas
-	@JoinColumn(name="codigo_carrera")
+	@JoinColumn(name="codigo_carrera",referencedColumnName="codigo_carrera",updatable=false,insertable=false,nullable=false)
 	private Carrera carrera;
 	public Alumno() {
 		
