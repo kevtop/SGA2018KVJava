@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -39,18 +40,19 @@ public class Clase implements Serializable{
 	private Date fechaInicio;
 	@Column(name="fecha_fin")
 	private Date fechaFin;
+	@Column(name="codigo_profesor",nullable=false,updatable=false,insertable=false)
+	private Long codigoProfesor;
+	@Column(name="codigo_curso",nullable=false,updatable=false,insertable=false)
+	private Long codigoCurso;
+	@ManyToOne
+	@JoinColumns({@JoinColumn(name="codigo_profesor",referencedColumnName="codigo_profesor",insertable=false,updatable=false,nullable=false),@JoinColumn(name="codigo_curso",referencedColumnName="codigo_curso",nullable=false,insertable=false,updatable=false)})
+	private ProfesoresCursos profesoresCursos;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="codigo_salon",referencedColumnName="codigo_salon",nullable=false,updatable=false,insertable=false)
 	private Salon salon;
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="codigo_grupoacademico",referencedColumnName="codigo_grupoacademico",nullable=false,updatable=false,insertable=false)
 	private GrupoAcademico grupoacademico;
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="codigo_profesor",referencedColumnName="codigo_profesor",nullable=false,updatable=false,insertable=false)
-	private Profesor profesor;
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="codigo_curso",referencedColumnName="codigo_curso",nullable=false,updatable=false,insertable=false)
-	private Curso curso;
 	@OneToMany(mappedBy="clase",fetch = FetchType.EAGER)
 	private Set<ClasesAlumnos> clasesAlumnos;
 	public Clase(Long codigoClase, String nombre, Date horaInicio, Date horaFin, Date fechaInicio, Date fechaFin,
@@ -64,8 +66,6 @@ public class Clase implements Serializable{
 		this.fechaFin = fechaFin;
 		this.salon = codigoSalon;
 		this.grupoacademico = grupoAcademico;
-		this.profesor = profesor;
-		this.curso = curso;
 	}
 	public Clase() {
 		super();
@@ -118,32 +118,18 @@ public class Clase implements Serializable{
 	public void setGrupoAcademico(GrupoAcademico grupoAcademico) {
 		this.grupoacademico = grupoAcademico;
 	}
-	public Profesor getProfesor() {
-		return profesor;
-	}
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
-	}
-	public Curso getCurso() {
-		return curso;
-	}
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigoClase == null) ? 0 : codigoClase.hashCode());
 		result = prime * result + ((salon == null) ? 0 : salon.hashCode());
-		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
 		result = prime * result + ((fechaFin == null) ? 0 : fechaFin.hashCode());
 		result = prime * result + ((fechaInicio == null) ? 0 : fechaInicio.hashCode());
 		result = prime * result + ((grupoacademico == null) ? 0 : grupoacademico.hashCode());
 		result = prime * result + ((horaFin == null) ? 0 : horaFin.hashCode());
 		result = prime * result + ((horaInicio == null) ? 0 : horaInicio.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((profesor == null) ? 0 : profesor.hashCode());
 		return result;
 	}
 	@Override
@@ -164,11 +150,6 @@ public class Clase implements Serializable{
 			if (other.salon != null)
 				return false;
 		} else if (!salon.equals(other.salon))
-			return false;
-		if (curso == null) {
-			if (other.curso != null)
-				return false;
-		} else if (!curso.equals(other.curso))
 			return false;
 		if (fechaFin == null) {
 			if (other.fechaFin != null)
@@ -200,12 +181,7 @@ public class Clase implements Serializable{
 				return false;
 		} else if (!nombre.equals(other.nombre))
 			return false;
-		if (profesor == null) {
-			if (other.profesor != null)
-				return false;
-		} else if (!profesor.equals(other.profesor))
-			return false;
-		return true;
+		return false;
 	}
 	
 	

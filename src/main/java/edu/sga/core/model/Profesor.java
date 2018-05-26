@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class Profesor implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="codigo_profesor")
 	private Long codigoProfesor;
 	@Column(name="apellidos")
@@ -33,21 +33,20 @@ public class Profesor implements Serializable {
 	private Long numeroCursos;
 	//de uno a muchos se debe crear un set para que devuelva varios objetos
 	@OneToMany(mappedBy="profesor",fetch=FetchType.EAGER)
-	private Set<Clase> clase;
-	@OneToMany(mappedBy="profesor",fetch=FetchType.EAGER)
 	private Set<ProfesoresCursos> profesoresCursos;
 	//de uno a muchos se referencian los campos y se crea un campo del tipo de objeto que regresara
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="codigo_puesto",referencedColumnName="codigo_puesto",updatable=false,insertable=false,nullable=false)
 	private Puesto puesto;
 	//no se debe crear el constructor con el campo mapeado de relacion
-	public Profesor(Long codigoProfesor, String apellidos, String nombres, Date fechaNacimiento, Long numeroCursos) {
+	public Profesor(Long codigoProfesor, String apellidos, String nombres, Date fechaNacimiento, Long numeroCursos, Puesto puesto) {
 		super();
 		this.codigoProfesor = codigoProfesor;
 		this.apellidos = apellidos;
 		this.nombres = nombres;
 		this.fechaNacimiento = fechaNacimiento;
 		this.numeroCursos = numeroCursos;
+		this.puesto = puesto;
 	}
 	public Profesor() {
 		super();
@@ -82,6 +81,18 @@ public class Profesor implements Serializable {
 	public void setNumeroCursos(Long numeroCursos) {
 		this.numeroCursos = numeroCursos;
 	}
+	public Set<ProfesoresCursos> getProfesoresCursos() {
+		return profesoresCursos;
+	}
+	public void setProfesoresCursos(Set<ProfesoresCursos> profesoresCursos) {
+		this.profesoresCursos = profesoresCursos;
+	}
+	public Puesto getPuesto() {
+		return puesto;
+	}
+	public void setPuesto(Puesto puesto) {
+		this.puesto = puesto;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,6 +102,8 @@ public class Profesor implements Serializable {
 		result = prime * result + ((fechaNacimiento == null) ? 0 : fechaNacimiento.hashCode());
 		result = prime * result + ((nombres == null) ? 0 : nombres.hashCode());
 		result = prime * result + ((numeroCursos == null) ? 0 : numeroCursos.hashCode());
+		result = prime * result + ((profesoresCursos == null) ? 0 : profesoresCursos.hashCode());
+		result = prime * result + ((puesto == null) ? 0 : puesto.hashCode());
 		return result;
 	}
 	@Override
@@ -126,6 +139,16 @@ public class Profesor implements Serializable {
 			if (other.numeroCursos != null)
 				return false;
 		} else if (!numeroCursos.equals(other.numeroCursos))
+			return false;
+		if (profesoresCursos == null) {
+			if (other.profesoresCursos != null)
+				return false;
+		} else if (!profesoresCursos.equals(other.profesoresCursos))
+			return false;
+		if (puesto == null) {
+			if (other.puesto != null)
+				return false;
+		} else if (!puesto.equals(other.puesto))
 			return false;
 		return true;
 	}

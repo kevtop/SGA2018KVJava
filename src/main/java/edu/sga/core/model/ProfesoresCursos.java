@@ -20,6 +20,8 @@ public class ProfesoresCursos implements Serializable {
 	//luego los campos propios de la entidad
 	@Column(name="tutor")
 	private String tutor;
+	
+	private Clase clase;
 	//luego las relaciones entre tablas
 	//basandome en los campos de la tabla y agregando las propiedades como estan en la tabla updatable,nullable,insertable
 	//haciendo la relacion con la etiqueta joincolumn y poniendo los campos de la relacion creando un objeto del tipo que va regresar el ManyToOne

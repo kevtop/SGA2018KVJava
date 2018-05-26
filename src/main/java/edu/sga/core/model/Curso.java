@@ -24,8 +24,6 @@ public class Curso implements Serializable {
 	private String descripcion;
 	@OneToMany(mappedBy="curso",fetch=FetchType.EAGER)
 	private Set<ProfesoresCursos> profesoresCursos;
-	@OneToMany(mappedBy="curso",fetch=FetchType.EAGER)
-	private Set<Clase> clase;
 	public Curso(Long codigoCurso, String descripcion) {
 		super();
 		this.codigoCurso = codigoCurso;
