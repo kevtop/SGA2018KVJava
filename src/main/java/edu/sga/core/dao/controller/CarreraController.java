@@ -82,5 +82,20 @@ public class CarreraController {
 		return new ResponseEntity<Carrera>(HttpStatus.OK);
 		
 	}
+	// update
+	@RequestMapping(value="/carrera/{id}",method = RequestMethod.PATCH,headers="Accept=application/json")
+	public ResponseEntity<Carrera> updateCarrera(@PathVariable("id") Long id, @RequestBody Carrera carrera) {
+		
+		if(id == null || id <= 0) {
+			return new ResponseEntity("Debe de ingresar un codigo",HttpStatus.CONFLICT);
+		}
+		Carrera elemento = carreraService.findById(id);
+		if(elemento==null) {
+			return new ResponseEntity("",HttpStatus.NO_CONTENT);
+		}
+		elemento.setDescripcion(carrera.getDescripcion());
+		carreraService.updateCarrera(elemento);
+		return new ResponseEntity<Carrera>(elemento,HttpStatus.OK);
+	}
 	
 }
