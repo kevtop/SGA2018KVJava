@@ -68,5 +68,19 @@ public class CarreraController {
 		headers.setLocation(ucBuilder.path("/api/v1/carrera/{id}").buildAndExpand(carrera.getCodigoCarrera()).toUri());
 		return new ResponseEntity<String>(headers,HttpStatus.CREATED);
 	}
+	// Delete
+	@RequestMapping(value="/carrera/{id}", method = RequestMethod.DELETE,headers="Accept=application/json")
+	public ResponseEntity<?> deleteCarrera(@PathVariable("id") Long id){
+		if(id == null || id <= 0) {
+			return new ResponseEntity("Debe ingresar un id",HttpStatus.CONFLICT);
+		}
+		Carrera elemento = carreraService.findById(id);
+		if(elemento==null) {
+			return new ResponseEntity(HttpStatus.NO_CONTENT);
+		}
+		carreraService.deleteCarreraById(id);
+		return new ResponseEntity<Carrera>(HttpStatus.OK);
+		
+	}
 	
 }
