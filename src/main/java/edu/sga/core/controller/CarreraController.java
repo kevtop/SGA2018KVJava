@@ -1,4 +1,4 @@
-package edu.sga.core.dao.controller;
+package edu.sga.core.controller;
 
 import java.util.ArrayList;
 import java.util.List;

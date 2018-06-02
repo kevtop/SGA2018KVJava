@@ -1,4 +1,4 @@
-package edu.sga.core.dao.controller;
+package edu.sga.core.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
