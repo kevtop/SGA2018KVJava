@@ -16,7 +16,9 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import edu.sga.core.model.Profesor;
+import edu.sga.core.model.Puesto;
 import edu.sga.core.service.ProfesorService;
+import edu.sga.core.service.PuestoService;
 
 @Controller
 @RequestMapping("/api/v1")
@@ -24,7 +26,8 @@ public class ProfesorController {
 	
 	@Autowired
 	private ProfesorService profesorService;
-	
+	@Autowired
+	private PuestoService puestoService;
 	
 	@RequestMapping(value="/profesor",method = RequestMethod.GET,headers="Accept=application/json")
 	public ResponseEntity<List<Profesor>> getProfesor(@RequestParam(value="codigoProfesor",required=false) Long codigoProfesor){
@@ -63,7 +66,10 @@ public class ProfesorController {
 	@RequestMapping(value="/profesor",method = RequestMethod.POST,headers="Accept=application/json")
 	public ResponseEntity<?> createProfesor(@RequestBody Profesor profesor,UriComponentsBuilder ucBuilder) {
 		
+		Puesto puesto = puestoService.findById(profesor.getPuesto().getCodigoPuesto());
+		profesor.setPuesto(puesto);
         profesorService.saveProfesor(profesor);
+        
 		UriComponents uriComponents = ucBuilder.path("/profesor/{id}").buildAndExpand(profesor.getCodigoProfesor());
 		return ResponseEntity.created(uriComponents.toUri()).build();
 		

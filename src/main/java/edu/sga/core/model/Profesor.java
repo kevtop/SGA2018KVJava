@@ -38,7 +38,7 @@ public class Profesor implements Serializable {
 	private Set<ProfesoresCursos> profesoresCursos;
 	//de uno a muchos se referencian los campos y se crea un campo del tipo de objeto que regresara
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="codigo_puesto",referencedColumnName="codigo_puesto",updatable=false,insertable=false,nullable=false)
+	@JoinColumn(name="codigo_puesto",updatable=false,insertable=false,nullable=false)
 	private Puesto puesto;
 	//no se debe crear el constructor con el campo mapeado de relacion
 	public Profesor(Long codigoProfesor, String apellidos, String nombres, Date fechaNacimiento, Long numeroCursos, Puesto puesto) {

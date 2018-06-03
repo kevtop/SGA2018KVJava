@@ -1,6 +1,7 @@
 package edu.sga.core.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -23,11 +24,13 @@ public class Puesto implements Serializable {
 	@Column(name="descripcion")
 	private String descripcion;
 	@OneToMany(mappedBy="puesto",fetch=FetchType.EAGER)
-	private Set<Profesor> profesor;
-	public Puesto(Long codigoPuesto, String descripcion) {
+	private Set<Profesor> profesor = new HashSet<Profesor>();
+	
+	public Puesto(Long codigoPuesto, String descripcion, Set<Profesor> profesor) {
 		super();
 		this.codigoPuesto = codigoPuesto;
 		this.descripcion = descripcion;
+		this.profesor = profesor;
 	}
 	public Puesto() {
 		super();
@@ -43,6 +46,13 @@ public class Puesto implements Serializable {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public Set<Profesor> getProfesor() {
+		return profesor;
+	}
+	public void setProfesor(Set<Profesor> profesor) {
+		this.profesor = profesor;
 	}
 	@Override
 	public int hashCode() {
