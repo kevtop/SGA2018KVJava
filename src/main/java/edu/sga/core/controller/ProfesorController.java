@@ -66,8 +66,8 @@ public class ProfesorController {
 	@RequestMapping(value="/profesor",method = RequestMethod.POST,headers="Accept=application/json")
 	public ResponseEntity<?> createProfesor(@RequestBody Profesor profesor,UriComponentsBuilder ucBuilder) {
 		
-		Puesto puesto = puestoService.findById(profesor.getPuesto().getCodigoPuesto());
-		profesor.setPuesto(puesto);
+		//Puesto puesto = puestoService.findById(profesor.getPuesto().getCodigoPuesto());
+		//profesor.setPuesto(puesto);
         profesorService.saveProfesor(profesor);
         
 		UriComponents uriComponents = ucBuilder.path("/profesor/{id}").buildAndExpand(profesor.getCodigoProfesor());

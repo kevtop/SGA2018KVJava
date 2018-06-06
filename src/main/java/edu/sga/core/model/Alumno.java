@@ -20,7 +20,7 @@ import javax.persistence.Table;
 //se utiliza serializable para hacer todos los modelos serializados
 public class Alumno implements Serializable {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo_alumno")  
 	private Long codigoAlumno;
 	@Column(name = "apellidos")

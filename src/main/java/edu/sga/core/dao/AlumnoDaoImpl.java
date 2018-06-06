@@ -46,9 +46,9 @@ public class AlumnoDaoImpl extends AbstractSession implements AlumnoDao {
 	}
 
 	@Override
-	public Alumno findByNombre(String nombre) {
+	public List<Alumno> findByNombre(String nombre) {
 		
-		return (Alumno)getSession().createQuery("from Alumno where nombre = :nombre").setParameter("nombre", nombre).list();
+		return (List<Alumno>)getSession().createQuery("from Alumno where nombres like :nombres").setParameter("nombres", nombre).list();
 	}
 	
 	

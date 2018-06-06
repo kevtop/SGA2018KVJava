@@ -11,5 +11,5 @@ public interface AlumnoService {
 	public void deleteAlumnoById(Long codigoAlumno);
 	public List<Alumno> findAllAlumnos();
 	public Alumno findById(Long codigoAlumno);
-	public Alumno findByNombre(String nombre);
+	public List<Alumno> findByNombre(String nombre);
 }

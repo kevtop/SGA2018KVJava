@@ -48,7 +48,7 @@ public class AlumnoServiceImpl implements AlumnoService {
 	}
 
 	@Override
-	public Alumno findByNombre(String nombre) {
+	public List<Alumno> findByNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return alumnoServiceDao.findByNombre(nombre);
 	}
