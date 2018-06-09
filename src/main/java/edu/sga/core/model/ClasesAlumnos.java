@@ -20,10 +20,10 @@ public class ClasesAlumnos implements Serializable {
 	@Column(name="fecha_asignacion")
 	private Date fechaAsignacion;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="codigo_alumno",referencedColumnName="codigo_alumno",updatable=false,nullable=false,insertable=false)
+	@JoinColumn(name="codigo_alumno",referencedColumnName="codigo_alumno",updatable=false,nullable=false,insertable=true)
 	private Alumno alumno;
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="codigo_clase",referencedColumnName="codigo_clase",updatable=false,nullable=false,insertable=false)
+	@JoinColumn(name="codigo_clase",referencedColumnName="codigo_clase",updatable=false,nullable=false,insertable=true)
 	private Clase clase;
 	public ClasesAlumnos(ClasesAlumnosId clasesAlumnoId, Date fechaAsignacion) {
 		super();

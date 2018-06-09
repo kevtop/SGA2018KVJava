@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 public class Clase implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="codigo_clase")
 	private Long codigoClase;
 	@Column(name="nombre")
@@ -40,18 +40,18 @@ public class Clase implements Serializable{
 	private Date fechaInicio;
 	@Column(name="fecha_fin")
 	private Date fechaFin;
-	@Column(name="codigo_profesor",nullable=false,updatable=false,insertable=false)
+	@Column(name="codigo_profesor",nullable=false,updatable=false,insertable=true)
 	private Long codigoProfesor;
-	@Column(name="codigo_curso",nullable=false,updatable=false,insertable=false)
+	@Column(name="codigo_curso",nullable=false,updatable=false,insertable=true)
 	private Long codigoCurso;
 	@ManyToOne
-	@JoinColumns({@JoinColumn(name="codigo_profesor",referencedColumnName="codigo_profesor",insertable=false,updatable=false,nullable=false),@JoinColumn(name="codigo_curso",referencedColumnName="codigo_curso",nullable=false,insertable=false,updatable=false)})
+	@JoinColumns({@JoinColumn(name="codigo_profesor",referencedColumnName="codigo_profesor",insertable=true,updatable=false,nullable=false),@JoinColumn(name="codigo_curso",referencedColumnName="codigo_curso",nullable=false,insertable=false,updatable=false)})
 	private ProfesoresCursos profesoresCursos;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="codigo_salon",referencedColumnName="codigo_salon",nullable=false,updatable=false,insertable=false)
+	@JoinColumn(name="codigo_salon",referencedColumnName="codigo_salon",nullable=false,updatable=false,insertable=true)
 	private Salon salon;
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="codigo_grupoacademico",referencedColumnName="codigo_grupoacademico",nullable=false,updatable=false,insertable=false)
+	@JoinColumn(name="codigo_grupoacademico",referencedColumnName="codigo_grupoacademico",nullable=false,updatable=false,insertable=true)
 	private GrupoAcademico grupoacademico;
 	@OneToMany(mappedBy="clase",fetch = FetchType.EAGER)
 	private Set<ClasesAlumnos> clasesAlumnos;

@@ -26,10 +26,10 @@ public class ProfesoresCursos implements Serializable {
 	//basandome en los campos de la tabla y agregando las propiedades como estan en la tabla updatable,nullable,insertable
 	//haciendo la relacion con la etiqueta joincolumn y poniendo los campos de la relacion creando un objeto del tipo que va regresar el ManyToOne
 	@ManyToOne
-	@JoinColumn(name="codigo_curso",referencedColumnName="codigo_curso",nullable=false,insertable=false,updatable=false)
+	@JoinColumn(name="codigo_curso",referencedColumnName="codigo_curso",nullable=false,insertable=true,updatable=false)
 	private Curso curso;
 	@ManyToOne
-	@JoinColumn(name="codigo_profesor",referencedColumnName="codigo_profesor",nullable=false,insertable=false,updatable=false)
+	@JoinColumn(name="codigo_profesor",referencedColumnName="codigo_profesor",nullable=false,insertable=true,updatable=false)
 	private Profesor profesor;
 	public ProfesoresCursos(ProfesoresCursosId profesoresCursosId, String tutor) {
 		super();

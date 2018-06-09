@@ -9,9 +9,9 @@ import javax.persistence.Embeddable;
 public class ClasesAlumnosId implements Serializable {
 
 	//aqui se implementan los campos de la base de datos que hacen relacion
-	@Column(name="codigo_alumno",nullable=false,updatable=false,insertable=false)
+	@Column(name="codigo_alumno",nullable=false,updatable=false,insertable=true)
 	private Long codigoAlumno;
-	@Column(name="codigo_clase",nullable=false,updatable=false,insertable=false)
+	@Column(name="codigo_clase",nullable=false,updatable=false,insertable=true)
 	private Long codigoClase;
 	public ClasesAlumnosId(Long codigoAlumno, Long codigoClase) {
 		super();
